@@ -1,13 +1,16 @@
 import asyncio
 import os
-
 from aiogram import Dispatcher, Bot
-from handlers import r
+
+from front.handlers import r
+from database.models import db_main
+
 from dotenv import load_dotenv, find_dotenv
 
 load_dotenv(find_dotenv())
 
 async def main() -> None:
+	await db_main()
 	TOKEN = os.getenv('TOKEN')
 	bot = Bot(token=TOKEN)
 	dp = Dispatcher()
