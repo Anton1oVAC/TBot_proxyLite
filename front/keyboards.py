@@ -3,16 +3,18 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, WebAppInfo
 
 
 def support_link():
-	inline_support_link_kb = [
-		InlineKeyboardButton(text="Написать в поддержку", url='https://t.me/Anton1o_Vakhnin'),
-		InlineKeyboardButton(text="Узнать свой ID", url='https://t.me/getmyid_bot'),
-		#InlineKeyboardButton(text="Оплата прокси", )
-		
-	]
-	return InlineKeyboardMarkup(inline_keyboard=[inline_support_link_kb])
-
+    inline_support_link_kb = [
+        [
+            InlineKeyboardButton(text="Написать в поддержку", url='https://t.me/Anton1o_Vakhnin'),
+            InlineKeyboardButton(text="Узнать свой ID", url='https://t.me/getmyid_bot')
+        ],
+        [
+            InlineKeyboardButton(text="Узнать цену подписки", callback_data='pay')
+        ]
+    ]
+    return InlineKeyboardMarkup(inline_keyboard=inline_support_link_kb)
 
 #def payment():
-	inline_payment_kb = [
-		InlineKeyboardButton(text="", )
-	]
+#	inline_payment_kb = [
+#		InlineKeyboardButton(text="1 месяц", )
+#	]
