@@ -3,13 +3,17 @@ from aiogram.filters import CommandStart, Command
 from aiogram import F, Router
 
 from .keyboards import support_link
+import database.requests as rq
 
 r = Router()
 
 # Декоратор
 @r.message(CommandStart())
 async def start_cmd(message: Message):
+	await rq.set_user(message.from_user.id)
 	await message.answer("Привет! Вот ссылка:", reply_markup=support_link())
+
+#r.message()
 
 #@r.message(Command('pay'))
 #async def pay(message: Message):
