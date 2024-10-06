@@ -1,13 +1,11 @@
 import asyncio
 import os
-import logging
-import sys
 from aiogram import Dispatcher, Bot
 
 from front.handlers import r
 from database.models import db_main
-
 from dotenv import load_dotenv, find_dotenv
+from logging_conf import log_conf
 
 load_dotenv(find_dotenv())
 
@@ -20,7 +18,7 @@ async def main() -> None:
 	await dp.start_polling(bot)
 
 if __name__ == '__main__':
-	logging.basicConfig(level=logging.INFO, stream=sys.stdout)
+	logger = log_conf()
 	try:
 		asyncio.run(main())
 	except KeyboardInterrupt:
