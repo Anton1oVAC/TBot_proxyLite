@@ -1,31 +1,51 @@
+#import os
+
 from aiogram.types import Message, CallbackQuery
 from aiogram.filters import CommandStart, Command
 from aiogram import F, Router
 
-from .keyboards import support_link
+from .keyboards import inline_start, payment
+#from admin.adm_keyboards import adm
 import database.requests as rq
 
 r = Router()
 
-# Декоратор
+
+# Роутер старт
 @r.message(CommandStart())
 async def start_cmd(message: Message):
 	await rq.set_user(message.from_user.id)
-	await message.answer("Привет! Вот ссылка:", reply_markup=support_link())
+	await message.answer("Привет! Вот ссылка:", reply_markup=inline_start())
 
-#r.message()
-
-#@r.message(Command('pay'))
-#async def pay(message: Message):
-#	await message.answer("Прайс: 1 месяц = 150 рублей")
-
+# Роутер "Каталог товара"
 @r.callback_query(F.data == 'pay')
 async def pay(callback: CallbackQuery):
-	await callback.answer("Оплата")
-	await callback.message.answer("Прайс:\n"
-							   "1 месяц = 150руб.\n"
-							   "3 месяц = 450руб.\n"
-							   "6 месяц = 900руб.")	
+	await callback.answer()
+	await callback.message.answer("Прайс:", reply_markup=payment())
+
+
+# "Каталог товара: кнопки"
+@r.callback_query(F.data == 'trial period')
+async def added_product(callback: CallbackQuery):
+	await callback.answer()
+	await callback.message.answer(f'Soon...')
+
+@r.callback_query(F.data == 'one month')
+async def changed_product(callback: CallbackQuery):
+	await callback.answer()
+	await callback.message.answer(f'Soon...2')
+
+@r.callback_query(F.data == 'three month')
+async def deleted_product(callback: CallbackQuery):
+	await callback.answer()
+	await callback.message.answer(f'Soon...3')
+
+@r.callback_query(F.data == 'one year')
+async def deleted_product(callback: CallbackQuery):
+	await callback.answer()
+	await callback.message.answer(f'Soon...4')
+
+
 
 @r.message(Command('help'))
 async def help_cmd(message: Message):
