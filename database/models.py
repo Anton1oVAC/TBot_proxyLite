@@ -40,9 +40,9 @@ class Item(Base):
 
 	id: Mapped[int] = mapped_column(primary_key=True)
 	name: Mapped[str] = mapped_column(String(50))
-	discription: Mapped[str] = mapped_column(String(100))
 	price: Mapped[int] = mapped_column()
-	category: Mapped[int] = mapped_column(ForeignKey('categories.id'))
+	description: Mapped[str] = mapped_column(String(100))
+	#category: Mapped[int] = mapped_column(ForeignKey('categories.id'))
 
 
 async def db_main():

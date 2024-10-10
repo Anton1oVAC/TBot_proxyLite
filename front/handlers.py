@@ -20,8 +20,19 @@ async def start_cmd(message: Message):
 # Роутер "Каталог товара"
 @r.callback_query(F.data == 'pay')
 async def pay(callback: CallbackQuery):
-	await callback.answer()
-	await callback.message.answer("Прайс:", reply_markup=payment())
+    await callback.answer()
+    items = await rq.get_added_item()  # Получаем список добавленных товаров
+	
+    if not items:
+        await callback.message.answer("В каталоге нет добавленных товаров.")
+        return
+
+    # Формируем сообщение с товарами
+    items_message = "Добавленные товары:\n\n"
+    for i in items:
+        items_message += f"{i.name}\n {i.price}\n {i.description}\n\n"
+
+    await callback.message.answer(items_message, reply_markup=payment())
 
 
 # "Каталог товара: кнопки"
@@ -40,10 +51,15 @@ async def deleted_product(callback: CallbackQuery):
 	await callback.answer()
 	await callback.message.answer(f'Soon...3')
 
-@r.callback_query(F.data == 'one year')
+@r.callback_query(F.data == 'four month')
 async def deleted_product(callback: CallbackQuery):
 	await callback.answer()
 	await callback.message.answer(f'Soon...4')
+
+@r.callback_query(F.data == 'one year')
+async def deleted_product(callback: CallbackQuery):
+	await callback.answer()
+	await callback.message.answer(f'Soon...5')
 
 
 

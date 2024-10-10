@@ -30,6 +30,9 @@ def payment():
             InlineKeyboardButton(text="3 месяца = 600р", callback_data='three month')
         ],
         [
+            InlineKeyboardButton(text="6 месяцев = 1800р", callback_data='four month')
+        ],
+        [
             InlineKeyboardButton(text="1 год = 3000р", callback_data='one year')
         ]
     ] 

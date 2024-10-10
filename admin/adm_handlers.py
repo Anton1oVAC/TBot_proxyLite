@@ -17,11 +17,6 @@ async def adm_cmd(message: Message):
 		await message.answer(f'Вы не админ', reply_markup=inline_start())
 
 
-
-@r_adm.message(lambda message: message.text == 'Добавить товар')
-async def added_product(message: Message):
-	await message.answer(f'Soon...')
-
 @r_adm.message(lambda message: message.text == 'Изменить товар')
 async def changed_product(message: Message):
 	await message.answer(f'Soon...2')
