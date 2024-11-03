@@ -1,0 +1,15 @@
+# игнор .env
+.env
+
+# Игнор файла базы данных
+db.sqlite3
+
+# Игнор временных файлов и кэш
+*.log
+*.tmp
+node_modules/
+__pycache__/
+
+# Игнор файлов IDE
+.idea/
+.vscode/
