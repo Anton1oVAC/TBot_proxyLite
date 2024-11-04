@@ -8,3 +8,11 @@ adm = ReplyKeyboardMarkup(
     ],
     resize_keyboard=True
 )
+
+cancel = ReplyKeyboardMarkup(
+	keyboard=[
+		[KeyboardButton(text='Отмена действия фсм')]
+    ],
+	resize_keyboard=True
+)
+

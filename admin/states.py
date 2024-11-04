@@ -5,3 +5,7 @@ class add(StatesGroup):
 	name = State()
 	price = State()
 	description = State()	
+
+# Класс и фсм для "Удалить товар"
+class dlt(StatesGroup):
+	name = State()

@@ -5,7 +5,6 @@ from sqlalchemy import select
 async def set_user(tg_id: int) -> None:
 	async with async_session() as session:
 		user = await session.scalar(select(User).where(User.tg_id == tg_id))
-
 		if not user:
 			session.add(User(tg_id=tg_id))
 			await session.commit()
@@ -13,13 +12,28 @@ async def set_user(tg_id: int) -> None:
 
 async def set_item(name: str, price: int, description: str) -> None:
 	async with async_session() as session:
-		new_item =  Item(name=name, price=price, description=description)
+		new_item = Item(name=name, price=price, description=description)
 		session.add(new_item)
 		try:
 			await session.commit()
 		except Exception as e:
 			await session.rollback()  # Откатить изменения в случае ошибки
 			print(f"Ошибка при добавлении товара: {e}")  # Логируем ошибку
+
+
+async def deleted_item(name: str) -> None:
+	async with async_session() as session:
+		result = await session.execute(select(Item).where(Item.name==name))
+		dlt_item = result.scalar()
+		if dlt_item:
+			await session.delete(dlt_item)
+			try:
+				await session.commit()
+			except Exception as e:
+				await session.rollback()
+				print(f"Ошибка при удалении товара: {e}.")
+		else:
+			print(f"Товар '{name}' не найден!")
 
 
 # Список добавленных товаров для роутера=pey

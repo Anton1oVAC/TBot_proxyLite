@@ -1,30 +1,31 @@
+from aiogram import Router
 from aiogram.types import Message
 from aiogram.fsm.context import FSMContext
-from aiogram import Router
 
 from .states import add
+from .adm_keyboards import cancel
 import database.requests as dr 
 
 r_add = Router()
+
 
 # Обработчкик Кнопоки "Добавить товар" + фсм состояние 
 @r_add.message(lambda message: message.text == 'Добавить товар')
 async def added_product(message: Message, state: FSMContext):
 	await state.set_state(add.name)
-	await message.answer(f'Введите название товара:')
-
+	await message.answer(f'Введите название товара:', reply_markup=cancel)
 
 @r_add.message(add.name)
 async def process_name(message: Message, state: FSMContext):
 	await state.update_data(name=message.text)
 	await state.set_state(add.price)
-	await message.answer(f'Введите цену товара:')
+	await message.answer(f'Введите цену товара:', reply_markup=cancel)
 
 @r_add.message(add.price)
 async def process_price(message: Message, state: FSMContext):
 	await state.update_data(price=message.text)
 	await state.set_state(add.description)
-	await message.answer(f'Введите описание товара:')
+	await message.answer(f'Введите описание товара:', reply_markup=cancel)
 
 @r_add.message(add.description)
 async def process_description(message: Message, state: FSMContext):

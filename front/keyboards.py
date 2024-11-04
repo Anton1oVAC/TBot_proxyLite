@@ -2,7 +2,7 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, WebAppInfo
 #from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 
-# Роутер старт: старт клавиатура
+# Роутер старт: старт клавиатура (В разработке: тест)
 def inline_start():
     inline_support_link_kb = [
         [
@@ -17,7 +17,7 @@ def inline_start():
     return InlineKeyboardMarkup(inline_keyboard=inline_support_link_kb)
 
 
-# "Каталог товара: кнопки"
+# "Каталог товара: кнопки" (В разработке: тест)
 def payment():
     inline_payment_kb = [
         [

@@ -15,18 +15,17 @@ r = Router()
 @r.message(CommandStart())
 async def start_cmd(message: Message):
 	await rq.set_user(message.from_user.id)
-	await message.answer("Привет! Вот ссылка:", reply_markup=inline_start())
+	await message.answer("Привет!", reply_markup=inline_start())
+
 
 # Роутер "Каталог товара"
 @r.callback_query(F.data == 'pay')
 async def pay(callback: CallbackQuery):
     await callback.answer()
     items = await rq.get_added_item()  # Получаем список добавленных товаров
-	
     if not items:
         await callback.message.answer("В каталоге нет добавленных товаров.")
         return
-
     # Формируем сообщение с товарами
     items_message = "Добавленные товары:\n\n"
     for i in items:
@@ -35,7 +34,7 @@ async def pay(callback: CallbackQuery):
     await callback.message.answer(items_message, reply_markup=payment())
 
 
-# "Каталог товара: кнопки"
+# "Каталог товара: кнопки" (В разработке: тест)
 @r.callback_query(F.data == 'trial period')
 async def added_product(callback: CallbackQuery):
 	await callback.answer()
@@ -62,7 +61,7 @@ async def deleted_product(callback: CallbackQuery):
 	await callback.message.answer(f'Soon...5')
 
 
-
+# (В разработке: тест)
 @r.message(Command('help'))
 async def help_cmd(message: Message):
 	await message.answer("Что нужно?")
