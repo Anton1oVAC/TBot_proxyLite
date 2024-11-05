@@ -1,11 +1,20 @@
 from aiogram.fsm.state import State, StatesGroup
 
+
 # Класс и фсм для "Добавить товар"
 class add(StatesGroup):
 	name = State()
 	price = State()
 	description = State()	
 
+
 # Класс и фсм для "Удалить товар"
 class dlt(StatesGroup):
 	name = State()
+
+
+# Класс и фсм для "Изменение товара"
+class change(StatesGroup):
+	name = State()
+	price = State()
+	description = State()

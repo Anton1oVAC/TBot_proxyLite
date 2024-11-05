@@ -6,6 +6,7 @@ from front.handlers import r
 from admin.adm_handlers import r_adm
 from admin.fsm_add import r_add
 from admin.fsm_del import r_dlt
+from admin.fsm_change import r_change
 from database.models import db_main
 from dotenv import load_dotenv, find_dotenv
 from logging_conf import log_conf
@@ -21,6 +22,7 @@ async def main() -> None:
 	dp.include_router(r_adm)
 	dp.include_router(r_add)
 	dp.include_router(r_dlt)
+	dp.include_router(r_change)
 	await dp.start_polling(bot)
 
 if __name__ == '__main__':

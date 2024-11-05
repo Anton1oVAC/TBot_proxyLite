@@ -25,8 +25,3 @@ async def adm_cmd(message: Message):
 async def cancel_button(message: Message, state: FSMContext):
 	await state.clear()
 	await message.answer(f'Отмена фсм', reply_markup=adm)
-
-# (В разработке: тест)
-@r_adm.message(lambda message: message.text == 'Изменить товар')
-async def changed_product(message: Message):
-	await message.answer(f'Soon...2')

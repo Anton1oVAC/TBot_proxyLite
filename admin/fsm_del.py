@@ -18,6 +18,5 @@ async def deleted_product(message: Message, state: FSMContext):
 async def process_item_name(message: Message, state: FSMContext):
     item_name = message.text
     await dr.deleted_item(item_name)
-    await dr.get_added_item()
     await message.answer(f'Товар с названием "{item_name}" был удален.')
     await state.clear()
